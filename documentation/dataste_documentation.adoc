@@ -1,0 +1,1 @@
+I need to create a documentation about the dataset and its source. I downloaded this dataset from kaggle. I also need to describe Knowledge graph design and creation process.
