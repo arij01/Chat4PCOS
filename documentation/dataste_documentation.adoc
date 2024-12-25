@@ -60,25 +60,6 @@ The goal of the knowledge graph is to represent the complex relationships betwee
 * `PATIENT_HAS_MEASUREMENT`: Links a `Patient` node to their `Hormone` node.
 * `PATIENT_HAS_RISK`: Links a `Patient` node to their `RiskFactor` node.
 
-== Knowledge Graph Creation Process
-
-=== Step 1: Data Preparation
-* The dataset was preprocessed to handle missing values, remove redundant columns, and ensure consistency.
-* BMI was calculated using the formula: \[BMI = \frac{Weight (kg)}{Height (m)^2}\].
-* The FSH/LH ratio was derived by dividing FSH levels by LH levels.
-
-=== Step 2: Graph Schema Definition
-The graph schema was designed to capture the relationships between patients, their conditions, hormones, and risk factors. This schema emphasizes modularity and scalability, enabling future extensions.
-
-=== Step 3: Node and Relationship Creation
-Nodes and relationships were generated from the dataset using Cypher queries. For each record in the dataset:
-
-* A `Patient` node was created with unique identifiers and demographic attributes.
-* Associated `Condition`, `Hormone`, and `RiskFactor` nodes were created, linked back to the `Patient` node using relationships.
-
-=== Step 4: Query Optimization
-Indexes were created on the `id` and `patient_id` properties to enhance the performance of queries on the graph.
-
 == Example Use Cases
 
 1. *Identify high-risk patients*:
