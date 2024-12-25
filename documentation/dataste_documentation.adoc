@@ -1,1 +1,91 @@
-I need to create a documentation about the dataset and its source. I downloaded this dataset from kaggle. I also need to describe Knowledge graph design and creation process.
+= Knowledge Graph Documentation for PCOS Dataset
+
+== Dataset Overview
+
+* Name: Polycystic Ovary Syndrome (PCOS) Dataset
+* Source: Kaggle
+* Owner: Prasoon Kottarathil
+* Description:
+  The dataset provides detailed clinical information about patients diagnosed with or suspected of having Polycystic Ovary Syndrome (PCOS). It includes both quantitative and qualitative data points such as hormone levels, patient demographics, menstrual cycle characteristics, and lifestyle factors.
+
+* License and Citation:
+  The dataset is available on Kaggle under the terms provided by the owner. Ensure to cite Prasoon Kottarathil as the original source when using the dataset in any publication or project.
+  Kaggle URL: https://www.kaggle.com/prasoonkottarathil
+
+== Knowledge Graph Design
+
+=== Purpose
+The goal of the knowledge graph is to represent the complex relationships between patients, their health conditions, hormone measurements, and risk factors. This graph-based representation aids in querying the data for insights and understanding correlations between various attributes.
+
+=== Entities and Relationships
+
+==== Entities
+
+1. *Patient*:
+   Represents an individual patient. Contains attributes:
+   - `id` (Primary Key)
+   - `Age`
+   - `Weight`
+   - `Height`
+   - `BMI` (calculated from weight and height)
+
+2. *Condition*:
+   Represents clinical attributes related to PCOS diagnosis:
+   - `id` (Primary Key)
+   - `patient_id` (Foreign Key linking to Patient)
+   - `PCOS_YN` (indicating presence/absence of PCOS)
+   - `Cycle_RI` (Cycle regularity/irregularity)
+   - `Cycle_length_days`
+
+3. *Hormone*:
+   Represents hormone measurements and calculated ratios:
+   - `id` (Primary Key)
+   - `patient_id` (Foreign Key linking to Patient)
+   - `FSH_mIU_mL`
+   - `LH_mIU_mL`
+   - `FSH_LH` (calculated as FSH/LH ratio)
+   - `AMH_ng_mL`
+   - `TSH_mIU_L`
+
+4. *RiskFactor*:
+   Represents lifestyle and physical risk indicators:
+   - `id` (Primary Key)
+   - `patient_id` (Foreign Key linking to Patient)
+   - `Weight_gain_YN`, `Hair_growth_YN`, `Skin_darkening_YN`, `Pimples_YN`
+   - `Fast_food_YN`, `Reg_Exercise_YN`
+
+==== Relationships
+
+* `PATIENT_HAS_CONDITION`: Links a `Patient` node to their `Condition` node.
+* `PATIENT_HAS_MEASUREMENT`: Links a `Patient` node to their `Hormone` node.
+* `PATIENT_HAS_RISK`: Links a `Patient` node to their `RiskFactor` node.
+
+== Knowledge Graph Creation Process
+
+=== Step 1: Data Preparation
+* The dataset was preprocessed to handle missing values, remove redundant columns, and ensure consistency.
+* BMI was calculated using the formula: \[BMI = \frac{Weight (kg)}{Height (m)^2}\].
+* The FSH/LH ratio was derived by dividing FSH levels by LH levels.
+
+=== Step 2: Graph Schema Definition
+The graph schema was designed to capture the relationships between patients, their conditions, hormones, and risk factors. This schema emphasizes modularity and scalability, enabling future extensions.
+
+=== Step 3: Node and Relationship Creation
+Nodes and relationships were generated from the dataset using Cypher queries. For each record in the dataset:
+
+* A `Patient` node was created with unique identifiers and demographic attributes.
+* Associated `Condition`, `Hormone`, and `RiskFactor` nodes were created, linked back to the `Patient` node using relationships.
+
+=== Step 4: Query Optimization
+Indexes were created on the `id` and `patient_id` properties to enhance the performance of queries on the graph.
+
+== Example Use Cases
+
+1. *Identify high-risk patients*:
+   Query patients with `PCOS_YN = 1` and multiple risk factors (e.g., `Weight_gain_YN = 1` and `Fast_food_YN = 1`).
+
+2. *Analyze hormone patterns*:
+   Find correlations between FSH/LH ratio and the presence of PCOS.
+
+3. *Assess lifestyle impact*:
+   Compare patients with regular exercise (`Reg_Exercise_YN = 1`) to those without.
