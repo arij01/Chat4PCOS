@@ -10,7 +10,7 @@
 
 * License and Citation:
   The dataset is available on Kaggle under the terms provided by the owner. Ensure to cite Prasoon Kottarathil as the original source when using the dataset in any publication or project.
-  Kaggle URL: https://www.kaggle.com/prasoonkottarathil
+  Kaggle URL: https://www.kaggle.com/datasets/prasoonkottarathil/polycystic-ovary-syndrome-pcos
 
 == Knowledge Graph Design
 

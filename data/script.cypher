@@ -107,14 +107,6 @@ CREATE (:RiskFactor { id: 24, patient_id: 24, Weight_gain_YN: 1, Hair_growth_YN:
 CREATE (:RiskFactor { id: 25, patient_id: 25, Weight_gain_YN: 0, Hair_growth_YN: 1, Skin_darkening_YN: 0, Pimples_YN: 1, Fast_food_YN: 0, Reg_Exercise_YN: 1 });
 
 // Relationship creation
-MATCH (p:Patient), (c:Condition)
-WHERE p.id = c.patient_id
-CREATE (p)-[:HAS_CONDITION]->(c);
-
-MATCH (p:Patient), (h:Hormone)
-WHERE p.id = h.patient_id
-CREATE (p)-[:HAS_HORMONE]->(h);
-
-MATCH (p:Patient), (r:RiskFactor)
-WHERE p.id = r.patient_id
-CREATE (p)-[:HAS_RISKFACTOR]->(r);
+CREATE INDEX patient_id_index FOR (p:Patient) ON (p.id);
+CREATE INDEX condition_patient_id_index FOR (c:Condition) ON (c.patient_id);
+CREATE INDEX hormone_patient_id_index FOR (h:Hormone) ON (h.patient_id);
