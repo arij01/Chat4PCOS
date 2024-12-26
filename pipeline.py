@@ -6,10 +6,7 @@ uri = "bolt://localhost:7687"
 username = "neo4j"  
 password = "chatbotchatbot"  
 
-# TOKEN = os.getenv("HUGGINGFACE_TOKEN")
-TOKEN="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"
-# Initialize the Hugging Face pipeline
-# generator = pipeline('text-generation', model='gpt-2', use_auth_token=TOKEN)
+
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
 def query_database(query):
@@ -25,7 +22,7 @@ def load_query(file_path):
 query = load_query("data/queries/pcos_query.cypher")
 
 data = query_database(query)
-print(data)
+# print(data)
 
 prompt = "Hello"
 
