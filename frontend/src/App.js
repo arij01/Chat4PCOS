@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
-import medicalIcon from './medical-icon.png'; 
+import medicalIcon from './medical-icon.png';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -9,26 +9,33 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!query.trim()) return;
+
     const userMessage = { text: query, type: 'user' };
-    setMessages([...messages, userMessage]);
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setQuery('');
 
     try {
-      const res = await axios.post('http://127.0.0.1:8000/ask', { query }); 
+      const res = await axios.post('http://127.0.0.1:8000/ask', { query });
       const botMessage = { text: res.data.ai_model_response, type: 'bot' };
-      setMessages([...messages, userMessage, botMessage]);
+      setMessages((prevMessages) => [...prevMessages, userMessage, botMessage]);
     } catch (error) {
       console.error('Error fetching data:', error);
-      const errorMessage = { text: 'Error fetching data', type: 'bot' };
-      setMessages([...messages, userMessage, errorMessage]);
+      const errorMessage = { text: 'Error fetching data. Please try again.', type: 'bot' };
+      setMessages((prevMessages) => [...prevMessages, userMessage, errorMessage]);
     }
   };
 
   return (
     <div className="App">
       <header className="App-header">
+        <div className="status">
+          <span></span>
+          <p>Online</p>
+        </div>
         <img src={medicalIcon} alt="Medical Icon" />
         <h1>Chat4PCOS</h1>
+        <button className="logout-button">Logout</button>
       </header>
       <div className="chat-container">
         {messages.map((message, index) => (

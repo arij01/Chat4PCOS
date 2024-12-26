@@ -81,6 +81,3 @@ async def ask_question(user_query: UserQuery):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
-    print("Received query:", user_input)
-    print("Database response:", db_response)
-    print("AI model response:", ai_model_response)
