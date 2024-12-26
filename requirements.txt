@@ -1,4 +1,8 @@
-transformer
+fastapi
+uvicorn
+pydantic
+neo4j
+transformers
 datasets
 accelerate
 huggingfacehub

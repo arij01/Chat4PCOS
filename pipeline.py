@@ -1,13 +1,14 @@
 from neo4j import GraphDatabase
 from transformers import pipeline
+from dotenv import load_dotenv
+import os
 
 
-
-
+load_dotenv()
 # Neo4j Database Configuration
-url = "bolt://localhost:7687"
-username = "neo4j"
-password = "chatbotchatbot"
+url = os.getenv("NEO4J_URL")
+username = os.getenv("NEO4J_USERNAME")
+password = os.getenv("NEO4J_PASSWORD")
 
 driver = GraphDatabase.driver(url, auth=(username, password))
 
@@ -61,8 +62,6 @@ def generate_model_response(user_input, db_response):
     prompt = f"User asked: {user_input}\nDatabase Information:\n{db_response}\nResponse:"
     model_response = model_pipeline(prompt, max_new_tokens=50, temperature=0.5, num_return_sequences=1)
     generated_text = model_response[0]['generated_text']
-    
-    # Extract the response part from the generated text
     response_start = generated_text.find("Response:") + len("Response:")
     response = generated_text[response_start:].strip()
     
