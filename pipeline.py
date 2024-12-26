@@ -21,7 +21,7 @@ def load_query(file_path):
         return file.read()
 
 
-query = load_query("data/queries.cypher")
+query = load_query("data/queries/pcos_query.cypher")
 parameters = {"patient_id": 1}
 data = query_database(query, parameters)
 
