@@ -18,11 +18,11 @@ function App() {
     try {
       const res = await axios.post('http://127.0.0.1:8000/ask', { query });
       const botMessage = { text: res.data.ai_model_response, type: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, userMessage, botMessage]);
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error('Error fetching data:', error);
       const errorMessage = { text: 'Error fetching data. Please try again.', type: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, userMessage, errorMessage]);
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
     }
   };
 
