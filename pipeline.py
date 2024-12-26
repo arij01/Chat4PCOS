@@ -56,7 +56,11 @@ def generate_response(user_input):
 
     return f"Database Information:\n{db_response}\n\nAI Model's Response:\n{model_response[0]['generated_text']}"
 
-
-user_query = input("Ask me anything about PCOS: ")
-response = generate_response(user_query)
-print(response)
+# Function to Generate AI Model Response
+def generate_model_response(user_input, db_response):
+    prompt = f"User asked: {user_input}\nDatabase Information:\n{db_response}\nResponse:"
+    model_response = model_pipeline(prompt, max_length=100, num_return_sequences=1)
+    return model_response[0]['generated_text']
+# user_query = input("Ask me anything about PCOS: ")
+# response = generate_response(user_query)
+# print(response)
