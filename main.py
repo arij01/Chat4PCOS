@@ -1,23 +1,22 @@
 from fastapi import FastAPI, HTTPException
-from pipeline import generate_response
+from pipeline import generate_response, generate_model_response
 from pydantic import BaseModel
 import uvicorn
 
 # Initialization
 app = FastAPI()
-user_query = input("Ask me anything about PCOS: ")
+class UserQuery(BaseModel):
+    query: str
 
-# Endpoint
+# FastAPI endpoint
 @app.post("/ask")
-def ask_question(user_query):
+def ask_question(user_query: UserQuery):
     try:
-        response = generate_response(user_query.query)
-        # prompt = f"User asked: {user_query.query}\nDatabase Information:\n{db_response}\nResponse:"
-        # model_response = model_pipeline(prompt, max_length=100, num_return_sequences=1)
+        db_response = generate_response(user_query.query)
+        model_response = generate_model_response(user_query.query, db_response)
         return {
-            "database_information": response,
-            # "ai_model_response": model_response[0]['generated_text']
+            "database_information": db_response,
+            "ai_model_response": model_response
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-uvicorn.run(app, host="0.0.0.0", port=8000)

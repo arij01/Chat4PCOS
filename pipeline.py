@@ -32,11 +32,11 @@ model_pipeline = pipeline("text-generation", model="gpt2")
 
 # Function to Generate Chatbot Responses
 def generate_response(user_input):
-
+    # Fetch relevant data from Neo4j
     if "PCOS" in user_input:
         data = query_database(pcos_query)
-        # print("Data from database:", data)  
         if data:
+            # Format the fetched data for user display
             db_response = ""
             for record in data:
                 hormones = record.get('hormones', [])
@@ -47,20 +47,12 @@ def generate_response(user_input):
                     db_response += f"TSH: {hormone.get('TSH_mIU_L')} mIU/L\n"
             return f"Database Information:\n{db_response}\n"
         else:
-            db_response = "No data found for the specified query."
+            return "No data found for the specified query."
     else:
-        db_response = "I couldn't find information on that topic."
-
-    
-    model_response = model_pipeline(f"User asked: {user_input}\nResponse:", max_length=100)
-
-    return f"Database Information:\n{db_response}\n\nAI Model's Response:\n{model_response[0]['generated_text']}"
+        return "I couldn't find information on that topic."
 
 # Function to Generate AI Model Response
 def generate_model_response(user_input, db_response):
     prompt = f"User asked: {user_input}\nDatabase Information:\n{db_response}\nResponse:"
     model_response = model_pipeline(prompt, max_length=100, num_return_sequences=1)
     return model_response[0]['generated_text']
-# user_query = input("Ask me anything about PCOS: ")
-# response = generate_response(user_query)
-# print(response)

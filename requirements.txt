@@ -2,3 +2,4 @@ transformer
 datasets
 accelerate
 huggingfacehub
+axios
