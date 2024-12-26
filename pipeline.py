@@ -55,16 +55,20 @@ def generate_response(user_input):
                     db_response += f"AMH: {hormone.get('AMH_ng_mL')} ng/mL, "
                     db_response += f"TSH: {hormone.get('TSH_mIU_L')} mIU/L\n"
             return db_response
-        else:
-            return "No data found for the specified query."
-    else:
-        return "I couldn't find information on that topic."
+    return generate_model_response(user_input, "No relevant database information found.")
 
 # Function to Generate AI Model Response
-def generate_model_response(db_response):
-    prompt = f"Database Information:\n{db_response}\nResponse:"
-    model_response = model_pipeline(prompt, max_new_tokens=50, num_return_sequences=1)
-    return model_response[0]['generated_text']
+def generate_model_response(user_input, db_response):
+    prompt = f"User asked: {user_input}\nDatabase Information:\n{db_response}\nResponse:"
+    model_response = model_pipeline(prompt, max_new_tokens=50, temperature=0.5, num_return_sequences=1)
+    generated_text = model_response[0]['generated_text']
+    
+    # Extract the response part from the generated text
+    response_start = generated_text.find("Response:") + len("Response:")
+    response = generated_text[response_start:].strip()
+    
+    return response
+
 
 # FastAPI Initialization
 app = FastAPI()
@@ -85,9 +89,9 @@ class UserQuery(BaseModel):
 @app.post("/ask")
 async def ask_question(user_query: UserQuery):
     user_input = user_query.query
-    db_response = generate_response(user_input)
-    ai_model_response = generate_model_response(db_response)
-    return {"ai_model_response": ai_model_response}
+    response = generate_response(user_input)
+    return {"ai_model_response": response}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
