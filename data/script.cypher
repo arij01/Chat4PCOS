@@ -105,14 +105,3 @@ CREATE (:RiskFactor { id: 22, patient_id: 22, Weight_gain_YN: 0, Hair_growth_YN:
 CREATE (:RiskFactor { id: 23, patient_id: 23, Weight_gain_YN: 1, Hair_growth_YN: 0, Skin_darkening_YN: 0, Pimples_YN: 1, Fast_food_YN: 0, Reg_Exercise_YN: 1 });
 CREATE (:RiskFactor { id: 24, patient_id: 24, Weight_gain_YN: 1, Hair_growth_YN: 1, Skin_darkening_YN: 0, Pimples_YN: 0, Fast_food_YN: 1, Reg_Exercise_YN: 1 });
 CREATE (:RiskFactor { id: 25, patient_id: 25, Weight_gain_YN: 0, Hair_growth_YN: 1, Skin_darkening_YN: 0, Pimples_YN: 1, Fast_food_YN: 0, Reg_Exercise_YN: 1 });
-
-// Relationship creation
-MATCH (p:Patient), (c:Condition)
-WHERE p.id = c.patient_id
-CREATE (p)-[:HAS_CONDITION]->(c);
-MATCH (p:Patient), (h:Hormone)
-WHERE p.id = h.patient_id
-CREATE (p)-[:HAS_HORMONE]->(h);
-MATCH (p:Patient), (r:RiskFactor)
-WHERE p.id = r.patient_id
-CREATE (p)-[:HAS_RISKFACTOR]->(r);

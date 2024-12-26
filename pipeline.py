@@ -6,11 +6,7 @@ username = "neo4j"
 password = "chatbotchatbot"  
 driver = GraphDatabase.driver(uri, auth=(username, password))
 
-def test_connection():
+def query_database(query, parameters=None):
     with driver.session() as session:
-        result = session.run("MATCH (n) RETURN n LIMIT 1")
-        for record in result:
-            print(record)
-
-test_connection()
-driver.close()
+        result = session.run(query, parameters)
+        return [record.data() for record in result]
