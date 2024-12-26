@@ -1,0 +1,102 @@
+= Project Documentation for Chat4PCOS
+
+== Graph RAG Pipeline Implementation
+
+The Graph RAG (Retrieval-Augmented Generation) pipeline is implemented to enhance the chatbot's responses by integrating data from a Neo4j graph database with a Hugging Face model. The pipeline consists of the following steps:
+
+1. *Database Querying*:
+    - The Neo4j database is queried using Cypher queries to retrieve relevant information about patients, their conditions, hormone levels, and risk factors.
+    - The query is loaded from a file and executed using the `query_database` function in the `pipeline.py` file.
+
+2. *Response Generation*:
+    - Predefined responses are used for common queries.
+    - For more complex queries, the retrieved database information is combined with a prompt and passed to the Hugging Face model to generate a response.
+    - The `generate_response` function handles the logic for determining whether to use a predefined response or generate a new one using the model.
+
+3. *Model Integration*:
+    - The Hugging Face GPT-2 model is used for text generation.
+    - The model is loaded using the `pipeline` function from the `transformers` library.
+    - The `generate_model_response` function constructs a prompt with the user query and database information, and generates a response using the model.
+
+== Frontend and Backend Development Process
+
+=== Backend Development
+
+1. *FastAPI Setup*:
+    - The backend is built using FastAPI, a modern web framework for building APIs with Python.
+    - The FastAPI server is initialized in the `api.py` file, and CORS middleware is added to allow communication with the frontend.
+
+2. *Endpoints*:
+    - A single endpoint `/ask` is defined to handle user queries.
+    - The endpoint receives a query, processes it using the `generate_response` function, and returns the generated response.
+
+3. *Database Integration*:
+    - The Neo4j database is configured using environment variables stored in a `.env` file.
+    - The database connection is established using the `GraphDatabase` driver from the `neo4j` library.
+
+=== Frontend Development
+
+1. *React Setup*:
+    - The frontend is built using React, a popular JavaScript library for building user interfaces.
+    - The project is bootstrapped with Create React App.
+
+2. *Components*:
+    - The main component is the `App` component, defined in the `App.js` file.
+    - The `App` component handles user input, displays messages, and communicates with the backend.
+
+3. *Styling*:
+    - The application is styled using CSS, with styles defined in the `App.css` file.
+    - The design includes a chat interface with user and bot messages, an input field, and a send button.
+
+== Prompt Engineering Techniques Used
+
+1. *Predefined Responses*:
+    - Common queries are matched against a set of predefined responses to provide quick and accurate answers.
+
+2. *Dynamic Prompt Construction*:
+    - For more complex queries, a prompt is dynamically constructed by combining the user query with relevant database information.
+    - This prompt is then passed to the Hugging Face model to generate a contextually relevant response.
+
+3. *Temperature and Token Control*:
+    - The model's response generation is controlled using parameters like `max_new_tokens` and `temperature` to balance creativity and coherence.
+
+== Challenges Encountered and How They Were Addressed
+
+1. *Database Integration*:
+    - Challenge: Ensuring efficient and accurate retrieval of data from the Neo4j database.
+    - Solution: Optimized Cypher queries and used the `GraphDatabase` driver to manage connections and sessions effectively.
+
+2. *Model Response Quality*:
+    - Challenge: Generating coherent and contextually relevant responses from the Hugging Face model.
+    - Solution: Fine-tuned the prompt engineering techniques and adjusted model parameters to improve response quality.
+
+3. *Frontend-Backend Communication*:
+    - Challenge: Handling asynchronous communication between the React frontend and FastAPI backend.
+    - Solution: Used the `axios` library for making HTTP requests and managed state effectively in the React components.
+
+== List of Tools and Technologies Used
+
+- *Backend*:
+    - FastAPI
+    - Neo4j
+    - Pydantic
+    - Uvicorn
+    - Dotenv
+
+- *Frontend*:
+    - React
+    - Axios
+    - Create React App
+
+- *Machine Learning*:
+    - Hugging Face Transformers
+    - GPT-2 Model
+
+- *Database*:
+    - Neo4j
+
+- *Development Tools*:
+    - Visual Studio Code
+    - Git
+    - Node.js and npm
+    - Python 3.12
