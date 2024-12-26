@@ -1,8 +1,9 @@
 # Chat4PCOS
-![chat4pcos ui]("C:\Users\21626\Pictures\Screenshots\Screenshot 2024-12-26 233135.png")
+
 ## Setup Instructions
 
 ### Prerequisites
+![Uploading Screenshot 2024-12-26 230830.png…]()
 
 - Python 3.8 or higher
 - Node.js and npm
