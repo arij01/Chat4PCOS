@@ -2,7 +2,11 @@
 
 ![Screenshot 2024-12-26 233135](https://github.com/user-attachments/assets/d2c1a987-6df9-4505-9ce9-dba541bd3544)
 
+## About
+
+Chat4PCOS is a chatbot application designed to assist patiens with questions related to Polycystic Ovary Syndrome (PCOS). It integrates data from a Neo4j graph database with a Hugging Face model to provide accurate and contextually relevant responses.
 ## Setup Instructions
+
 
 ### Prerequisites
 
