@@ -57,8 +57,11 @@ The Graph RAG (Retrieval-Augmented Generation) pipeline is implemented to enhanc
     - For more complex queries, a prompt is dynamically constructed by combining the user query with relevant database information.
     - This prompt is then passed to the Hugging Face model to generate a contextually relevant response.
 
-3. *Temperature and Token Control*:
-    - The model's response generation is controlled using parameters like `max_new_tokens` and `temperature` to balance creativity and coherence.
+3. *One-Shot Prompting*:
+    - One-shot prompting is used to generate responses by providing the model with a single prompt.
+
+4. *Temperature and Token Control*:
+    - The model's response generation is controlled using parameters like `max_new_tokens` and `temperature`.
 
 == Challenges Encountered and How They Were Addressed
 
