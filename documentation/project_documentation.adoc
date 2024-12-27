@@ -77,16 +77,14 @@ The Graph RAG (Retrieval-Augmented Generation) pipeline is implemented to enhanc
 == List of Tools and Technologies Used
 
 - *Backend*:
+    - Python
     - FastAPI
-    - Neo4j
     - Pydantic
     - Uvicorn
-    - Dotenv
 
 - *Frontend*:
     - React
     - Axios
-    - Create React App
 
 - *Machine Learning*:
     - Hugging Face Transformers
@@ -94,9 +92,3 @@ The Graph RAG (Retrieval-Augmented Generation) pipeline is implemented to enhanc
 
 - *Database*:
     - Neo4j
-
-- *Development Tools*:
-    - Visual Studio Code
-    - Git
-    - Node.js and npm
-    - Python 3.12
