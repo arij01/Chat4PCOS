@@ -35,7 +35,7 @@ Chat4PCOS is a chatbot application designed to assist patiens with questions rel
 
 4. **Set up the Neo4j database:**
     - Start your Neo4j database.
-    - Load the data from [script.cypher](http://_vscodecontentref_/27) and [relationships_queries.cypher](http://_vscodecontentref_/28) into the Neo4j database.
+    - Load the data from script.cypher and relationships_queries.cypher localted in the data folder into the Neo4j database.
 
 
 6. **Run the FastAPI server:**
