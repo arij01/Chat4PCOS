@@ -18,14 +18,14 @@ Chat4PCOS is a chatbot application designed to assist patiens with questions rel
 
 1. **Clone the repository:**
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/arij01/Chat4PCOS.git
+    cd Chat4PCOS
     ```
 
 2. **Create a virtual environment and activate it:**
     ```sh
     python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    source venv\Scripts\activate
     ```
 
 3. **Install the required Python packages:**
