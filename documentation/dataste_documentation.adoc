@@ -27,7 +27,7 @@ The goal of the knowledge graph is to represent the complex relationships betwee
    - `Age`
    - `Weight`
    - `Height`
-   - `BMI` (calculated from weight and height)
+   - `BMI`
 
 2. *Condition*:
    Represents clinical attributes related to PCOS diagnosis:
@@ -43,7 +43,7 @@ The goal of the knowledge graph is to represent the complex relationships betwee
    - `patient_id` (Foreign Key linking to Patient)
    - `FSH_mIU_mL`
    - `LH_mIU_mL`
-   - `FSH_LH` (calculated as FSH/LH ratio)
+   - `FSH_LH`
    - `AMH_ng_mL`
    - `TSH_mIU_L`
 
@@ -51,8 +51,12 @@ The goal of the knowledge graph is to represent the complex relationships betwee
    Represents lifestyle and physical risk indicators:
    - `id` (Primary Key)
    - `patient_id` (Foreign Key linking to Patient)
-   - `Weight_gain_YN`, `Hair_growth_YN`, `Skin_darkening_YN`, `Pimples_YN`
-   - `Fast_food_YN`, `Reg_Exercise_YN`
+   - `Weight_gain_YN`
+   - `Hair_growth_YN`
+   - `Skin_darkening_YN`
+   - `Pimples_YN`
+   - `Fast_food_YN`
+   - `Reg_Exercise_YN`
 
 ==== Relationships
 
